@@ -1,491 +1,733 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tulsa's Mini Bazaar | Tulsa</title>
-    <style>
-        :root {
-            --primary-color: #e63946;
-            --secondary-color: #457b9d;
-            --light-color: #f1faee;
-            --dark-color: #1d3557;
-            --success-color: #2a9d8f;
-            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: var(--font-main);
-            line-height: 1.6;
-            background-color: var(--light-color);
-            color: var(--dark-color);
-        }
-        
-        .language-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-        }
-        
-        .language-toggle button {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        .language-toggle button:hover {
-            background-color: var(--dark-color);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-top: 2rem;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-        
-        .header p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .navigation {
-            background-color: var(--secondary-color);
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .info-section {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .info-section h2 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        
-        .info-item {
-            margin-bottom: 1rem;
-        }
-        
-        .info-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-        
-        .info-link {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        
-        .info-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .stores-section {
-            padding: 2rem 0;
-        }
-        
-        .stores-section h2 {
-            color: var(--secondary-color);
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-        
-        .stores-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .store-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .store-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-        
-        .store-image {
-            width: 100%;
-            height: 200px;
-            position: relative;
-        }
-        
-        .store-slideshow {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .store-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .store-slide.active {
-            opacity: 1;
-        }
-        
-        .store-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .store-content {
-            padding: 1.5rem;
-        }
-        
-        .store-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--secondary-color);
-        }
-        
-        .store-content p {
-            color: #555;
-            margin-bottom: 1rem;
-        }
-        
-        .store-content .contact-info {
-            margin: 1rem 0;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-            background-color: var(--dark-color);
-            color: white;
-        }
-        
-        @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulsa's Mini Bazaar | Tulsa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  
+  :root {
+      --primary-color: #ff4d6d;
+      --primary-light: #ffa5b6;
+      --secondary-color: #3a86ff;
+      --secondary-light: #7eb0ff;
+      --dark-color: #1a2238;
+      --light-color: #f8f9fa;
+      --accent-color: #ff9e00;
+      --success-color: #0ead69;
+      --font-main: 'Poppins', sans-serif;
+      --gradient-primary: linear-gradient(135deg, #ff4d6d 0%, #ff9e00 100%);
+      --gradient-secondary: linear-gradient(135deg, #3a86ff 0%, #4cc9f0 100%);
+      --gradient-dark: linear-gradient(135deg, #1a2238 0%, #394867 100%);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-strong: 0 15px 35px rgba(0,0,0,0.15);
+      --transition-main: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      background-color: var(--light-color);
+      color: var(--dark-color);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e0e0e0' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+  }
+  
+  .language-toggle button {
+      background: var(--gradient-secondary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: var(--transition-main);
+      box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+  }
+  
+  .language-toggle button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(58, 134, 255, 0.4);
+  }
+  
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+  }
+  
+  .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-top: 3rem;
+  }
+  
+  .header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-primary);
+      background-clip: text;  /* Add this line */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 5px 25px rgba(255, 77, 109, 0.2);
+      position: relative;
+      display: inline-block;
+  }
+  
+  .header h1::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 4px;
+      background: var(--gradient-primary);
+      bottom: -10px;
+      left: 25%;
+      border-radius: 50px;
+  }
+  
+  .header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 1.5rem auto 0;
+      color: #555;
+      font-weight: 300;
+  }
+  
+  .navigation {
+      background: var(--gradient-dark);
+      padding: 1rem 0;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(26, 34, 56, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+  }
+  
+  .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+  }
+  
+  .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      transition: var(--transition-main);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+  }
+  
+  .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-primary);
+      transition: 0.5s ease;
+      z-index: -1;
+      border-radius: 50px;
+  }
+  
+  .nav-link:hover {
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+      transform: translateY(-3px);
+  }
+  
+  .nav-link:hover::before {
+      width: 100%;
+  }
+  
+  .info-section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+  }
+  
+  .info-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient-primary);
+  }
+  
+  .info-section h2 {
+      color: var(--dark-color);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+  }
+  
+  .info-section h2::after {
+      content: '';
+      position: absolute;
+      width: 30%;
+      height: 3px;
+      background: var(--gradient-secondary);
+      bottom: -5px;
+      left: 0;
+      border-radius: 50px;
+  }
+  
+  .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+  }
+  
+  .info-item {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+  }
+  
+  .info-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--gradient-secondary);
+      border-radius: 50px;
+  }
+  
+  .info-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark-color);
+      font-weight: 600;
+  }
+  
+  .info-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition-main);
+      position: relative;
+      padding-bottom: 2px;
+  }
+  
+  .info-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+  }
+  
+  .info-link:hover {
+      color: var(--primary-color);
+  }
+  
+  .info-link:hover::after {
+      width: 100%;
+  }
+  
+  .stores-section {
+      padding: 2rem 0;
+  }
+  
+  .stores-section h2 {
+      color: var(--dark-color);
+      margin-bottom: 2.5rem;
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+  }
+  
+  .stores-section h2::after {
+      content: '';
+      position: absolute;
+      width: 30%;
+      height: 3px;
+      background: var(--gradient-primary);
+      bottom: -10px;
+      left: 35%;
+      border-radius: 50px;
+  }
+  
+  .stores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2.5rem;
+  }
+  
+  .store-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+  }
+  
+  .store-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .store-image {
+      width: 100%;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+  }
+  
+  .store-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(26, 34, 56, 0.3);
+      z-index: 1;
+  }
+  
+  .store-slideshow {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+  }
+  
+  .store-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out, transform 0.6s ease;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  .store-slide.active {
+      opacity: 1;
+  }
+  
+  .store-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+  }
+  
+  .store-card:hover .store-slide.active img {
+      transform: scale(1.1);
+  }
+  
+  .store-content {
+      padding: 2rem;
+      position: relative;
+  }
+  
+  .store-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background: var(--gradient-secondary);
+      border-radius: 50px;
+  }
+  
+  .store-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark-color);
+      font-weight: 600;
+  }
+  
+  .store-content p {
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+  }
+  
+  .store-content .contact-info {
+      margin: 1.5rem 0 0.5rem;
+      background: rgba(249, 249, 249, 0.5);
+      padding: 1rem;
+      border-radius: 10px;
+      border-left: 3px solid var(--primary-color);
+  }
+  
+  .contact-info p {
+      margin-bottom: 0.5rem;
+  }
+  
+  footer {
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 5rem;
+      background: var(--gradient-dark);
+      color: white;
+      position: relative;
+  }
+  
+  footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: var(--gradient-primary);
+  }
+  
+  footer p {
+      font-weight: 300;
+      letter-spacing: 1px;
+  }
+  
+  /* Animation for store cards */
+  @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .store-card {
+      animation: fadeIn 0.8s ease-out forwards;
+      opacity: 0;
+  }
+  
+  .store-card:nth-child(1) { animation-delay: 0.1s; }
+  .store-card:nth-child(2) { animation-delay: 0.2s; }
+  .store-card:nth-child(3) { animation-delay: 0.3s; }
+  .store-card:nth-child(4) { animation-delay: 0.4s; }
+  
+  @media (max-width: 768px) {
+      .info-grid {
+          grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+          font-size: 2rem;
+      }
+      
+      .nav-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+      }
+      
+      .language-toggle {
+          top: 15px;
+          right: 15px;
+      }
+      
+      .info-section,
+      .store-content {
+          padding: 1.5rem;
+      }
+      
+      .store-card:hover {
+          transform: translateY(-5px);
+      }
+  }
+</style>
 </head>
 <body>
-    <div class="language-toggle">
-        <button id="lang-toggle" onclick="toggleLanguage()">English</button>
-    </div>
+<div class="language-toggle">
+  <button id="lang-toggle" onclick="toggleLanguage()">English</button>
+</div>
 
-    <div class="navigation">
-        <div class="container">
-            <div class="nav-container">
-                <a href="index.html" class="nav-link lang-es">Inicio</a>
-                <a href="index.html" class="nav-link lang-en" style="display: none;">Home</a>
-                <a href="el-bazaar.html" class="nav-link lang-es">El Bazaar</a>
-                <a href="el-bazaar.html" class="nav-link lang-en" style="display: none;">El Bazaar</a>
-                <a href="mini-bazaar.html" class="nav-link lang-es">Mini Bazaar</a>
-                <a href="mini-bazaar.html" class="nav-link lang-en" style="display: none;">Mini Bazaar</a>
-            </div>
-        </div>
-    </div>
+<div class="navigation">
+  <div class="container">
+      <div class="nav-container">
+          <a href="index.html" class="nav-link lang-es">Inicio</a>
+          <a href="index.html" class="nav-link lang-en" style="display: none;">Home</a>
+          <a href="el-bazaar.html" class="nav-link lang-es">El Bazaar</a>
+          <a href="el-bazaar.html" class="nav-link lang-en" style="display: none;">El Bazaar</a>
+          <a href="mini-bazaar.html" class="nav-link lang-es">Mini Bazaar</a>
+          <a href="mini-bazaar.html" class="nav-link lang-en" style="display: none;">Mini Bazaar</a>
+      </div>
+  </div>
+</div>
 
-    <div class="container">
-        <header class="header">
-            <h1 class="lang-es">Tulsa's Mini Bazaar</h1>
-            <h1 class="lang-en" style="display: none;">Tulsa's Mini Bazaar</h1>
-            <p class="lang-es">Un centro comercial íntimo con tiendas selectas en Tulsa.</p>
-            <p class="lang-en" style="display: none;">An intimate shopping center with select stores in Tulsa.</p>
-        </header>
+<div class="container">
+  <header class="header">
+      <h1 class="lang-es">Tulsa's Mini Bazaar</h1>
+      <h1 class="lang-en" style="display: none;">Tulsa's Mini Bazaar</h1>
+      <p class="lang-es">Un centro comercial íntimo con tiendas selectas en Tulsa.</p>
+      <p class="lang-en" style="display: none;">An intimate shopping center with select stores in Tulsa.</p>
+  </header>
 
-        <section class="info-section">
-            <h2 class="lang-es">Información</h2>
-            <h2 class="lang-en" style="display: none;">Information</h2>
-            
-            <div class="info-grid">
-                <div class="info-item">
-                    <h3 class="lang-es">Dirección</h3>
-                    <h3 class="lang-en" style="display: none;">Address</h3>
-                    <p>
-                        <a href="#" class="info-link address-link" data-address="12564 E 21st ST, Tulsa, OK 74129">12564 E 21st ST, Tulsa, OK 74129</a>
-                    </p>
-                </div>
-                
-                <div class="info-item">
-                    <h3 class="lang-es">Teléfono</h3>
-                    <h3 class="lang-en" style="display: none;">Phone</h3>
-                    <p>
-                        <a href="tel:5395937048" class="info-link">(539) 593-7048</a>
-                    </p>
-                </div>
-                
-                <div class="info-item">
-                    <h3 class="lang-es">Horario</h3>
-                    <h3 class="lang-en" style="display: none;">Business Hours</h3>
-                    <p class="lang-es">Todos los días excepto martes: 10:00 AM - 8:00 PM</p>
-                    <p class="lang-es">Martes: Cerrado</p>
-                    <p class="lang-en" style="display: none;">Every day except Tuesday: 10:00 AM - 8:00 PM</p>
-                    <p class="lang-en" style="display: none;">Tuesday: Closed</p>
-                </div>
-            </div>
-        </section>
+  <section class="info-section">
+      <h2 class="lang-es">Información</h2>
+      <h2 class="lang-en" style="display: none;">Information</h2>
+      
+      <div class="info-grid">
+          <div class="info-item">
+              <h3 class="lang-es">Dirección</h3>
+              <h3 class="lang-en" style="display: none;">Address</h3>
+              <p>
+                  <a href="#" class="info-link address-link" data-address="12564 E 21st ST, Tulsa, OK 74129">12564 E 21st ST, Tulsa, OK 74129</a>
+              </p>
+          </div>
+          
+          <div class="info-item">
+              <h3 class="lang-es">Teléfono</h3>
+              <h3 class="lang-en" style="display: none;">Phone</h3>
+              <p>
+                  <a href="tel:5395937048" class="info-link">(539) 593-7048</a>
+              </p>
+          </div>
+          
+          <div class="info-item">
+              <h3 class="lang-es">Horario</h3>
+              <h3 class="lang-en" style="display: none;">Business Hours</h3>
+              <p class="lang-es">Todos los días excepto martes: 10:00 AM - 8:00 PM</p>
+              <p class="lang-es">Martes: Cerrado</p>
+              <p class="lang-en" style="display: none;">Every day except Tuesday: 10:00 AM - 8:00 PM</p>
+              <p class="lang-en" style="display: none;">Tuesday: Closed</p>
+          </div>
+      </div>
+  </section>
 
-        <section class="stores-section">
-            <h2 class="lang-es">Nuestras Tiendas</h2>
-            <h2 class="lang-en" style="display: none;">Our Stores</h2>
-            
-            <div class="stores-grid">
-                <!-- Store 1 -->
-                <div class="store-card">
-                    <div class="store-image">
-                        <div class="store-slideshow" data-store="barri-financial-mini">
-                            <div class="store-slide active">
-                                <img src="pictures/barri/barri.webp" alt="BARRI FINANCIAL GROUP">
-                            </div>
-                            <div class="store-slide">
-                                <img src="pictures/barri/barri.webp" alt="BARRI FINANCIAL GROUP Services">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="store-content">
-                        <h3>BARRI FINANCIAL GROUP</h3>
-                        <p class="lang-es">Cobro de cheques, envío de dinero, giros</p>
-                        <p class="lang-en" style="display: none;">Check cashing, money sending services, money orders</p>
-                        <div class="contact-info">
-                            <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                            <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Store 2 -->
-                <div class="store-card">
-                    <div class="store-image">
-                        <div class="store-slideshow" data-store="zukasa-furniture">
-                            <div class="store-slide active">
-                                <img src="pictures/furniture store/furniture store_001.webp" alt="ZUKASA FURNITURE STORE">
-                            </div>
-                            <div class="store-slide">
-                                <img src="pictures/furniture store/furniture store_002.webp" alt="ZUKASA FURNITURE Products">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="store-content">
-                        <h3>ZUKASA FURNITURE STORE</h3>
-                        <p class="lang-es">Mesas, sofás, camas y más</p>
-                        <p class="lang-en" style="display: none;">Tables, couches, beds, etc.</p>
-                        <div class="contact-info">
-                            <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                            <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Store 3 -->
-                <div class="store-card">
-                    <div class="store-image">
-                        <div class="store-slideshow" data-store="rancho-nuevo-mini">
-                            <div class="store-slide active">
-                                <img src="pictures/cowboy/hats/hats_001.webp" alt="RANCHO NUEVO BOOTS">
-                            </div>
-                            <div class="store-slide">
-                                <img src="pictures/cowboy/boots/boots_001.webp" alt="RANCHO NUEVO Western Wear">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="store-content">
-                        <h3>RANCHO NUEVO BOOTS</h3>
-                        <p class="lang-es">Botas, sombreros, cinturones, chamarras, jeans</p>
-                        <p class="lang-en" style="display: none;">Boots, hats, belts, jackets, jeans</p>
-                        <div class="contact-info">
-                            <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                            <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Store 4 -->
-                <div class="store-card">
-                    <div class="store-image">
-                        <div class="store-slideshow" data-store="rc-sports-mini">
-                            <div class="store-slide active">
-                                <img src="pictures/soccer store/soccer store_001.webp" alt="RC SPORTS">
-                            </div>
-                            <div class="store-slide">
-                                <img src="pictures/soccer store/soccer store_002.webp" alt="RC SPORTS Custom Shirts">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="store-content">
-                        <h3>RC SPORTS</h3>
-                        <p class="lang-es">Camisetas personalizadas para equipos y eventos, accesorios de fútbol</p>
-                        <p class="lang-en" style="display: none;">Custom shirts for teams and events, soccer accessories</p>
-                        <div class="contact-info">
-                            <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                            <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                            <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+  <section class="stores-section">
+      <h2 class="lang-es">Nuestras Tiendas</h2>
+      <h2 class="lang-en" style="display: none;">Our Stores</h2>
+      
+      <div class="stores-grid">
+          <!-- Store 1 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="barri-financial-mini">
+                      <div class="store-slide active">
+                          <img src="/api/placeholder/300/200" alt="BARRI FINANCIAL GROUP">
+                      </div>
+                      <div class="store-slide">
+                          <img src="/api/placeholder/300/200" alt="BARRI FINANCIAL GROUP Services">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>BARRI FINANCIAL GROUP</h3>
+                  <p class="lang-es">Cobro de cheques, envío de dinero, giros</p>
+                  <p class="lang-en" style="display: none;">Check cashing, money sending services, money orders</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 2 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="zukasa-furniture">
+                      <div class="store-slide active">
+                          <img src="/api/placeholder/300/200" alt="ZUKASA FURNITURE STORE">
+                      </div>
+                      <div class="store-slide">
+                          <img src="/api/placeholder/300/200" alt="ZUKASA FURNITURE Products">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>ZUKASA FURNITURE STORE</h3>
+                  <p class="lang-es">Mesas, sofás, camas y más</p>
+                  <p class="lang-en" style="display: none;">Tables, couches, beds, etc.</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 3 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="rancho-nuevo-mini">
+                      <div class="store-slide active">
+                          <img src="/api/placeholder/300/200" alt="RANCHO NUEVO BOOTS">
+                      </div>
+                      <div class="store-slide">
+                          <img src="/api/placeholder/300/200" alt="RANCHO NUEVO Western Wear">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>RANCHO NUEVO BOOTS</h3>
+                  <p class="lang-es">Botas, sombreros, cinturones, chamarras, jeans</p>
+                  <p class="lang-en" style="display: none;">Boots, hats, belts, jackets, jeans</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 4 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="rc-sports-mini">
+                      <div class="store-slide active">
+                          <img src="/api/placeholder/300/200" alt="RC SPORTS">
+                      </div>
+                      <div class="store-slide">
+                          <img src="/api/placeholder/300/200" alt="RC SPORTS Custom Shirts">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>RC SPORTS</h3>
+                  <p class="lang-es">Camisetas personalizadas para equipos y eventos, accesorios de fútbol</p>
+                  <p class="lang-en" style="display: none;">Custom shirts for teams and events, soccer accessories</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>
 
-    <footer>
-        <p class="lang-es">&copy; 2025 Tulsa's Mini Bazaar. Todos los derechos reservados.</p>
-        <p class="lang-en" style="display: none;">&copy; 2025 Tulsa's Mini Bazaar. All rights reserved.</p>
-    </footer>
+<footer>
+  <p class="lang-es">&copy; 2025 Tulsa's Mini Bazaar. Todos los derechos reservados.</p>
+  <p class="lang-en" style="display: none;">&copy; 2025 Tulsa's Mini Bazaar. All rights reserved.</p>
+</footer>
 
-    <script>
-        let language = 'es'; // Default language is Spanish
-        
-        function toggleLanguage() {
-            language = language === 'es' ? 'en' : 'es';
-            
-            const esElements = document.querySelectorAll('.lang-es');
-            const enElements = document.querySelectorAll('.lang-en');
-            const langToggle = document.getElementById('lang-toggle');
-            
-            if (language === 'en') {
-                esElements.forEach(el => el.style.display = 'none');
-                enElements.forEach(el => el.style.display = 'block');
-                langToggle.textContent = 'Español';
-            } else {
-                esElements.forEach(el => el.style.display = 'block');
-                enElements.forEach(el => el.style.display = 'none');
-                langToggle.textContent = 'English';
-            }
-        }
-        
-        // Slideshow functionality
-        function initSlideshows() {
-            const slideshows = document.querySelectorAll('.store-slideshow');
-            
-            slideshows.forEach(slideshow => {
-                const slides = slideshow.querySelectorAll('.store-slide');
-                let currentSlide = 0;
-                
-                // Only setup slideshow if more than one slide exists
-                if (slides.length > 1) {
-                    setInterval(() => {
-                        slides[currentSlide].classList.remove('active');
-                        currentSlide = (currentSlide + 1) % slides.length;
-                        slides[currentSlide].classList.add('active');
-                    }, 3000); // Change slide every 3 seconds
-                }
-            });
-        }
-        
-        // Address link functionality
-        function setupAddressLinks() {
-            const addressLinks = document.querySelectorAll('.address-link');
-            
-            addressLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const address = this.getAttribute('data-address');
-                    
-                    // Check if iOS (iPhone, iPad, iPod)
-                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-                    
-                    if (isIOS) {
-                        window.open(`maps://?q=${encodeURIComponent(address)}`, '_blank');
-                    } else {
-                        window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
-                    }
-                });
-            });
-        }
-        
-        // Initialize when the page loads
-        window.onload = function() {
-            initSlideshows();
-            setupAddressLinks();
-        };
-    </script>
+<script>
+  let language = 'es'; // Default language is Spanish
+  
+  function toggleLanguage() {
+      language = language === 'es' ? 'en' : 'es';
+      
+      const esElements = document.querySelectorAll('.lang-es');
+      const enElements = document.querySelectorAll('.lang-en');
+      const langToggle = document.getElementById('lang-toggle');
+      
+      if (language === 'en') {
+          esElements.forEach(el => el.style.display = 'none');
+          enElements.forEach(el => el.style.display = 'block');
+          langToggle.textContent = 'Español';
+      } else {
+          esElements.forEach(el => el.style.display = 'block');
+          enElements.forEach(el => el.style.display = 'none');
+          langToggle.textContent = 'English';
+      }
+  }
+  
+  // Slideshow functionality
+  function initSlideshows() {
+      const slideshows = document.querySelectorAll('.store-slideshow');
+      
+      slideshows.forEach(slideshow => {
+          const slides = slideshow.querySelectorAll('.store-slide');
+          let currentSlide = 0;
+          
+          // Only setup slideshow if more than one slide exists
+          if (slides.length > 1) {
+              setInterval(() => {
+                  slides[currentSlide].classList.remove('active');
+                  currentSlide = (currentSlide + 1) % slides.length;
+                  slides[currentSlide].classList.add('active');
+              }, 3000); // Change slide every 3 seconds
+          }
+      });
+  }
+  
+  // Address link functionality
+  function setupAddressLinks() {
+      const addressLinks = document.querySelectorAll('.address-link');
+      
+      addressLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const address = this.getAttribute('data-address');
+              
+              // Check if iOS (iPhone, iPad, iPod)
+              const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+              
+              if (isIOS) {
+                  window.open(`maps://?q=${encodeURIComponent(address)}`, '_blank');
+              } else {
+                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
+              }
+          });
+      });
+  }
+  
+  // Initialize when the page loads
+  window.onload = function() {
+      initSlideshows();
+      setupAddressLinks();
+      
+      // Check if there's a saved language preference and apply it
+      const savedLanguage = localStorage.getItem('preferredLanguage');
+      if (savedLanguage) {
+          language = savedLanguage;
+          toggleLanguage();
+      }
+      
+      // Add animation to the header
+      const headerTitle = document.querySelector('.header h1');
+      headerTitle.style.opacity = '0';
+      headerTitle.style.transform = 'translateY(-20px)';
+      
+      setTimeout(() => {
+          headerTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+          headerTitle.style.opacity = '1';
+          headerTitle.style.transform = 'translateY(0)';
+      }, 300);
+  };
+</script>
 </body>
 </html>
