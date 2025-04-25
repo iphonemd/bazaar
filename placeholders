@@ -1,0 +1,56 @@
+        const stores = [
+            {
+                name: "Joyería Taxco",
+                nameEn: "Taxco Jewelry",
+                service: "Joyería fina y reparaciones",
+                serviceEn: "Fine jewelry and repairs",
+                phone: "(918) 555-1234",
+                webpage: "#joyeria-taxco",
+                images: ['pictures/jewelry%20store/jewelry-store-1803808_1280.jpg', '/pictures/jewelry%20store/robin-edqvist-rN2VS60w88Q-unsplash.jpg'] // Placeholder images
+            },
+            {
+                name: "RC Sports",
+                nameEn: "RC Sports",
+                service: "Artículos deportivos y camisetas personalizadas",
+                serviceEn: "Sports goods and custom team shirts",
+                phone: "(918) 555-2345",
+                webpage: "#rc-sports",
+                images: ['pictures/soccer%20store/jin-woo-lee-jTCr3t_qIi4-unsplash.jpg', 'pictures/soccer%20store/the-hammadi-DnnU9qVreqA-unsplash.jpg'] // Placeholder image
+            },
+            {
+                name: "Kandy Flower Shop",
+                nameEn: "Kandy Flower Shop",
+                service: "Florería y tienda de regalos",
+                serviceEn: "Flower and gift shop",
+                phone: "(918) 555-3456",
+                webpage: "#kandy-flowers",
+                images: ['pictures/flowe%20shop/paolo-bendandi-xeUvnFJI6zo-unsplash.jpg', 'pictures/flowe%20shop/roman-kraft-_oH66az_yug-unsplash.jpg'] // Placeholder images
+            },
+            {
+                name: "Alteraciones Bertha",
+                nameEn: "Bertha's Alterations",
+                service: "Sastrería y alteraciones de ropa",
+                serviceEn: "Tailor shop and clothing alterations",
+                phone: "(918) 555-4567",
+                webpage: "#alteraciones-bertha",
+                images: ['pictures/tailor%20shop/kevin-yudhistira-alloni-i1mnFq5JeX8-unsplash.jpg', 'pictures/tailor%20shop/logan-weaver-lgnwvr-JqRQtSr2MCI-unsplash.jpg'] // Placeholder images
+            },
+            {
+                name: "CNV Furniture",
+                nameEn: "CNV Furniture",
+                service: "Mueblería",
+                serviceEn: "Furniture store",
+                phone: "(918) 555-5678",
+                webpage: "#cnv-furniture",
+                images: ['pictures/furniture%20store/albero-furniture-bratislava-3RfIi22Y97Y-unsplash.jpg', 'pictures/furniture%20store/albero-furniture-bratislava-8V-cAc_2K08-unsplash.jpg'] // Placeholder images
+            },
+            {
+                name: "Estética Mirabella",
+                nameEn: "Mirabella Beauty Salon",
+                service: "Salón de belleza y barbería",
+                serviceEn: "Beauty salon and barber shop",
+                phone: "(918) 555-6789",
+                webpage: "#estetica-mirabella",
+                images: ['pictures/barber%20shop/agustin-fernandez-1Pmp9uxK8X8-unsplash.jpg', 'pictures/barber%20shop/allef-vinicius-IvQeAVeJULw-unsplash.jpg'] // Placeholder images
+            }
+        ];

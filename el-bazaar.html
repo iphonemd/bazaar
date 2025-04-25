@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Bazaar Indoor Shopping Center | Tulsa</title>
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #457b9d;
+            --light-color: #f1faee;
+            --dark-color: #1d3557;
+            --success-color: #2a9d8f;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-toggle button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .language-toggle button:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .navigation {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .info-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .info-item {
+            margin-bottom: 1rem;
+        }
+        
+        .info-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .info-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .info-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .stores-section {
+            padding: 2rem 0;
+        }
+        
+        .stores-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .store-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .store-image {
+            width: 100%;
+            height: 200px;
+            position: relative;
+        }
+        
+        .store-slideshow {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .store-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .store-slide.active {
+            opacity: 1;
+        }
+        
+        .store-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .store-content {
+            padding: 1.5rem;
+        }
+        
+        .store-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .store-content p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        .store-content .contact-info {
+            margin: 1rem 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle">
+        <button id="lang-toggle" onclick="toggleLanguage()">English</button>
+    </div>
+
+    <div class="navigation">
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="nav-link lang-es">Inicio</a>
+                <a href="index.html" class="nav-link lang-en" style="display: none;">Home</a>
+                <a href="el-bazaar.html" class="nav-link lang-es">El Bazaar</a>
+                <a href="el-bazaar.html" class="nav-link lang-en" style="display: none;">El Bazaar</a>
+                <a href="mini-bazaar.html" class="nav-link lang-es">Mini Bazaar</a>
+                <a href="mini-bazaar.html" class="nav-link lang-en" style="display: none;">Mini Bazaar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="lang-es">El Bazaar Indoor Shopping Center</h1>
+            <h1 class="lang-en" style="display: none;">El Bazaar Indoor Shopping Center</h1>
+            <p class="lang-es">Su destino para compras en Tulsa con una gran variedad de tiendas y servicios.</p>
+            <p class="lang-en" style="display: none;">Your shopping destination in Tulsa with a wide variety of stores and services.</p>
+        </header>
+
+        <section class="info-section">
+            <h2 class="lang-es">Información</h2>
+            <h2 class="lang-en" style="display: none;">Information</h2>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3 class="lang-es">Dirección</h3>
+                    <h3 class="lang-en" style="display: none;">Address</h3>
+                    <p>
+                        <a href="#" class="info-link address-link" data-address="2121 S Garnett Rd, Tulsa, OK">2121 S Garnett Rd, Tulsa, OK</a>
+                    </p>
+                </div>
+                
+                <div class="info-item">
+                    <h3 class="lang-es">Teléfono</h3>
+                    <h3 class="lang-en" style="display: none;">Phone</h3>
+                    <p>
+                        <a href="tel:9186055131" class="info-link">(918) 605-5131</a>
+                    </p>
+                </div>
+                
+                <div class="info-item">
+                    <h3 class="lang-es">Horario</h3>
+                    <h3 class="lang-en" style="display: none;">Business Hours</h3>
+                    <p class="lang-es">Todos los días: 10:00 AM - 8:00 PM</p>
+                    <p class="lang-en" style="display: none;">Every day: 10:00 AM - 8:00 PM</p>
+                    <p class="lang-es"><small>Nota: Cada tienda puede tener un horario diferente.</small></p>
+                    <p class="lang-en" style="display: none;"><small>Note: Each vendor may have different hours.</small></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stores-section">
+            <h2 class="lang-es">Nuestras Tiendas</h2>
+            <h2 class="lang-en" style="display: none;">Our Stores</h2>
+            
+            <div class="stores-grid">
+                <!-- Store 1 -->
+                <div class="store-card">
+                    <div class="store-image">
+                        <div class="store-slideshow" data-store="queens-fashion">
+                            <div class="store-slide active">
+                                <img src="pictures/clothing/clothing2.webp" alt="QUEENS FASHION">
+                            </div>
+                            <div class="store-slide">
+                                <img src="pictures/clothing/clothing1.webp" alt="QUEENS FASHION Display">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="store-content">
+                        <h3>QUEENS FASHION</h3>
+                        <p class="lang-es">Tienda de ropa</p>
+                        <p class="lang-en" style="display: none;">Clothing store</p>
+                        <div class="contact-info">
+                            <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                            <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                            <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                            <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                        </div>
+                    </div>
+                </div>
+            <!-- Store 2 -->
+            <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="accesorios-el-regio">
+                      <div class="store-slide active">
+                          <img src="pictures/clothing/clothing3.webp" alt="ACCESORIOS EL REGIO">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/soccer store/soccer store_001.webp" alt="ACCESORIOS EL REGIO Products">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>ACCESORIOS EL REGIO</h3>
+                  <p class="lang-es">Un poco de todo, mochilas, llaveros y más</p>
+                  <p class="lang-en" style="display: none;">A little bit of everything, backpacks, keychains and more</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 3 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="gaona-imports">
+                      <div class="store-slide active">
+                          <img src="pictures/clothing/clothing1.webp" alt="GAONA IMPORTS">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/clothing/clothing2.webp" alt="GAONA IMPORTS Products">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>GAONA IMPORTS</h3>
+                  <p class="lang-es">Tienda de ropa</p>
+                  <p class="lang-en" style="display: none;">Clothing store</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 4 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="kandy-flower-shop">
+                      <div class="store-slide active">
+                          <img src="pictures/flowe shop/flowe shop_001.webp" alt="KANDY FLOWER SHOP">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/flowe shop/flowe shop_002.webp" alt="KANDY FLOWER SHOP Arrangement">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>KANDY FLOWER SHOP</h3>
+                  <p class="lang-es">Florería</p>
+                  <p class="lang-en" style="display: none;">Flower shop</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 5 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="supertortas">
+                      <div class="store-slide active">
+                          <img src="pictures/restaurant/unnamed-2.webp" alt="SUPERTORTAS JUGOS Y LICUADOS">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/restaurant/unnamed-4.webp" alt="SUPERTORTAS Food">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>SUPERTORTAS JUGOS Y LICUADOS</h3>
+                  <p class="lang-es">Comida, snacks y jugos</p>
+                  <p class="lang-en" style="display: none;">Food, snacks and juices</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 6 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="joyeria-taxco">
+                      <div class="store-slide active">
+                          <img src="pictures/jewelry store/jewelry store_001.webp" alt="JOYERIA TAXCO">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/jewelry store/jewelry store_002.webp" alt="JOYERIA TAXCO Jewelry">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>JOYERIA TAXCO</h3>
+                  <p class="lang-es">Joyería</p>
+                  <p class="lang-en" style="display: none;">Jewelry store</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 7 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="barri-financial">
+                      <div class="store-slide active">
+                          <img src="pictures/barri/barri.webp" alt="BARRI FINANCIAL GROUP">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/barri/barri.webp" alt="BARRI FINANCIAL GROUP Services">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>BARRI FINANCIAL GROUP</h3>
+                  <p class="lang-es">Cobro de cheques, envío de dinero, giros</p>
+                  <p class="lang-en" style="display: none;">Check cashing, money sending services, money orders</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 8 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="cnv-furniture">
+                      <div class="store-slide active">
+                          <img src="pictures/furniture store/furniture store_001.webp" alt="CNV FURNITURE STORE">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/furniture store/furniture store_002.webp" alt="CNV FURNITURE Products">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>CNV FURNITURE STORE</h3>
+                  <p class="lang-es">Mesas, sofás, camas y más</p>
+                  <p class="lang-en" style="display: none;">Tables, couches, beds, etc.</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 9 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="rancho-nuevo">
+                      <div class="store-slide active">
+                          <img src="pictures/cowboy/jackets/jackets_001.webp" alt="RANCHO NUEVO BOOTS">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/cowboy/boots/boots_003.webp" alt="RANCHO NUEVO Western Wear">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>RANCHO NUEVO BOOTS</h3>
+                  <p class="lang-es">Botas, sombreros, cinturones, chamarras, jeans</p>
+                  <p class="lang-en" style="display: none;">Boots, hats, belts, jackets, jeans</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 10 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="rc-sports">
+                      <div class="store-slide active">
+                          <img src="pictures/soccer store/soccer store_001.webp" alt="RC SPORTS">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/soccer store/soccer store_002.webp" alt="RC SPORTS Custom Shirts">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>RC SPORTS</h3>
+                  <p class="lang-es">Camisetas personalizadas para equipos y eventos, accesorios de fútbol</p>
+                  <p class="lang-en" style="display: none;">Custom shirts for teams and events, soccer accessories</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Store 11 -->
+          <div class="store-card">
+              <div class="store-image">
+                  <div class="store-slideshow" data-store="estetica-mirabella">
+                      <div class="store-slide active">
+                          <img src="pictures/barber shop/barber shop_001.webp" alt="ESTETICA MIRABELLA">
+                      </div>
+                      <div class="store-slide">
+                          <img src="pictures/barber shop/barber shop_002.webp" alt="ESTETICA MIRABELLA Services">
+                      </div>
+                  </div>
+              </div>
+              <div class="store-content">
+                  <h3>ESTETICA MIRABELLA</h3>
+                  <p class="lang-es">Barbería</p>
+                  <p class="lang-en" style="display: none;">Barber shop</p>
+                  <div class="contact-info">
+                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
+                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
+                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
+                  </div>
+              </div>
+          </div>
+        </div>
+          
+        </section>
+    </div>
+    
+    <footer>
+        <p class="lang-es">&copy; 2025 El Bazaar Indoor Shopping Center. Todos los derechos reservados.</p>
+        <p class="lang-en" style="display: none;">&copy; 2025 El Bazaar Indoor Shopping Center. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let language = 'es'; // Default language is Spanish
+        
+        function toggleLanguage() {
+            language = language === 'es' ? 'en' : 'es';
+            
+            const esElements = document.querySelectorAll('.lang-es');
+            const enElements = document.querySelectorAll('.lang-en');
+            const langToggle = document.getElementById('lang-toggle');
+            
+            if (language === 'en') {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                langToggle.textContent = 'Español';
+            } else {
+                esElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                langToggle.textContent = 'English';
+            }
+        }
+        
+        // Slideshow functionality
+        function initSlideshows() {
+            const slideshows = document.querySelectorAll('.store-slideshow');
+            
+            slideshows.forEach(slideshow => {
+                const slides = slideshow.querySelectorAll('.store-slide');
+                let currentSlide = 0;
+                
+                // Only setup slideshow if more than one slide exists
+                if (slides.length > 1) {
+                    setInterval(() => {
+                        slides[currentSlide].classList.remove('active');
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        slides[currentSlide].classList.add('active');
+                    }, 3000); // Change slide every 3 seconds
+                }
+            });
+        }
+        
+        // Address link functionality
+        function setupAddressLinks() {
+            const addressLinks = document.querySelectorAll('.address-link');
+            
+            addressLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const address = this.getAttribute('data-address');
+                    
+                    // Check if iOS (iPhone, iPad, iPod)
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                    
+                    if (isIOS) {
+                        window.open(`maps://?q=${encodeURIComponent(address)}`, '_blank');
+                    } else {
+                        window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
+                    }
+                });
+            });
+        }
+        
+        // Initialize when the page loads
+        window.onload = function() {
+            initSlideshows();
+            setupAddressLinks();
+        };
+    </script>
+</body>
+</html> 

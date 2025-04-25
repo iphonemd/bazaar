@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulsa Bazaars | Inicio</title>
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #457b9d;
+            --light-color: #f1faee;
+            --dark-color: #1d3557;
+            --success-color: #2a9d8f;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-toggle button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .language-toggle button:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .bazaar-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .bazaar-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .bazaar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .bazaar-image {
+            width: 100%;
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bazaar-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .bazaar-content {
+            padding: 1.5rem;
+        }
+        
+        .bazaar-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .bazaar-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #c1121f;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .bazaar-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .bazaar-card {
+                max-width: 100%;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle">
+        <button id="lang-toggle" onclick="toggleLanguage()">English</button>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="lang-es">Bienvenidos a los Bazares de Tulsa</h1>
+            <h1 class="lang-en" style="display: none;">Welcome to Tulsa Bazaars</h1>
+            <p class="lang-es">Explore nuestros centros comerciales con tiendas únicas y servicios diversos para toda la familia.</p>
+            <p class="lang-en" style="display: none;">Explore our shopping centers with unique stores and diverse services for the whole family.</p>
+        </header>
+
+        <div class="bazaar-options">
+            <div class="bazaar-card">
+                <div class="bazaar-image">
+                    <img src="pictures/el-bazaar.webp" alt="El Bazaar Indoor Shopping Center">
+                </div>
+                <div class="bazaar-content">
+                    <h2>El Bazaar Indoor Shopping Center</h2>
+                    <p class="lang-es">Centro comercial cubierto con una gran variedad de tiendas, servicios y opciones de comida para toda la familia.</p>
+                    <p class="lang-en" style="display: none;">Indoor shopping center with a wide variety of stores, services, and food options for the whole family.</p>
+                    <a href="el-bazaar.html" class="btn lang-es">Visitar El Bazaar</a>
+                    <a href="el-bazaar.html" class="btn lang-en" style="display: none;">Visit El Bazaar</a>
+                </div>
+            </div>
+
+            <div class="bazaar-card">
+                <div class="bazaar-image">
+                    <img src="pictures/mini-bazaar.webp" alt="Tulsa's Mini Bazaar">
+                </div>
+                <div class="bazaar-content">
+                    <h2>Tulsa's Mini Bazaar</h2>
+                    <p class="lang-es">Un centro comercial más íntimo con tiendas selectas y atención personalizada.</p>
+                    <p class="lang-en" style="display: none;">A more intimate shopping center with select stores and personalized attention.</p>
+                    <a href="mini-bazaar.html" class="btn lang-es">Visitar Mini Bazaar</a>
+                    <a href="mini-bazaar.html" class="btn lang-en" style="display: none;">Visit Mini Bazaar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="lang-es">&copy; 2025 Bazares de Tulsa. Todos los derechos reservados.</p>
+        <p class="lang-en" style="display: none;">&copy; 2025 Tulsa Bazaars. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let language = 'es'; // Default language is Spanish
+        
+        function toggleLanguage() {
+            language = language === 'es' ? 'en' : 'es';
+            
+            const esElements = document.querySelectorAll('.lang-es');
+            const enElements = document.querySelectorAll('.lang-en');
+            const langToggle = document.getElementById('lang-toggle');
+            
+            if (language === 'en') {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                langToggle.textContent = 'Español';
+            } else {
+                esElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                langToggle.textContent = 'English';
+            }
+            
+            // Save language preference to localStorage
+            localStorage.setItem('preferredLanguage', language);
+        }
+        
+        // Check if there's a saved language preference and apply it
+        window.onload = function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            if (savedLanguage) {
+                language = savedLanguage;
+                toggleLanguage();
+            }
+        };
+    </script>
+</body>
+</html>
