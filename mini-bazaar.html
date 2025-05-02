@@ -1,741 +1,485 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tulsa's Mini Bazaar | Tulsa</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-  
-  :root {
-      --primary-color: #ff4d6d;
-      --primary-light: #ffa5b6;
-      --secondary-color: #3a86ff;
-      --secondary-light: #7eb0ff;
-      --dark-color: #1a2238;
-      --light-color: #f8f9fa;
-      --accent-color: #ff9e00;
-      --success-color: #0ead69;
-      --font-main: 'Poppins', sans-serif;
-      --gradient-primary: linear-gradient(135deg, #ff4d6d 0%, #ff9e00 100%);
-      --gradient-secondary: linear-gradient(135deg, #3a86ff 0%, #4cc9f0 100%);
-      --gradient-dark: linear-gradient(135deg, #1a2238 0%, #394867 100%);
-      --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
-      --shadow-strong: 0 15px 35px rgba(0,0,0,0.15);
-      --transition-main: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-  }
-  
-  body {
-      font-family: var(--font-main);
-      line-height: 1.6;
-      background-color: var(--light-color);
-      color: var(--dark-color);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e0e0e0' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-  
-  .language-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-  }
-  
-  .language-toggle button {
-      background: var(--gradient-secondary);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: var(--transition-main);
-      box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
-  }
-  
-  .language-toggle button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 7px 20px rgba(58, 134, 255, 0.4);
-  }
-  
-  .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
-  }
-  
-  .header {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding-top: 3rem;
-  }
-  
-  .header h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-primary);
-      background-clip: text;  /* Add this line */
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 5px 25px rgba(255, 77, 109, 0.2);
-      position: relative;
-      display: inline-block;
-  }
-  
-  .header h1::after {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 4px;
-      background: var(--gradient-primary);
-      bottom: -10px;
-      left: 25%;
-      border-radius: 50px;
-  }
-  
-  .header p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 1.5rem auto 0;
-      color: #555;
-      font-weight: 300;
-  }
-  
-  .navigation {
-      background: var(--gradient-dark);
-      padding: .5rem 0;
-      margin-bottom: 3rem;
-      box-shadow: 0 4px 20px rgba(26, 34, 56, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 90;
-  }
-  
-  .nav-container {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-  }
-  
-  .nav-link {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-      padding: 0.7rem 1.5rem;
-      border-radius: 50px;
-      transition: var(--transition-main);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-  }
-  
-  .nav-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: var(--gradient-primary);
-      transition: 0.5s ease;
-      z-index: -1;
-      border-radius: 50px;
-  }
-  
-  .nav-link:hover {
-      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-      transform: translateY(-3px);
-  }
-  
-  .nav-link:hover::before {
-      width: 100%;
-  }
-  
-  .info-section {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      box-shadow: var(--shadow-soft);
-      padding: 2.5rem;
-      margin-bottom: 3rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-  }
-  
-  .info-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: var(--gradient-primary);
-  }
-  
-  .info-section h2 {
-      color: var(--dark-color);
-      margin-bottom: 1.5rem;
-      font-size: 2rem;
-      font-weight: 600;
-      position: relative;
-      display: inline-block;
-  }
-  
-  .info-section h2::after {
-      content: '';
-      position: absolute;
-      width: 30%;
-      height: 3px;
-      background: var(--gradient-secondary);
-      bottom: -5px;
-      left: 0;
-      border-radius: 50px;
-  }
-  
-  .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-  }
-  
-  .info-item {
-      position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: 1.5rem;
-  }
-  
-  .info-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--gradient-secondary);
-      border-radius: 50px;
-  }
-  
-  .info-item h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.8rem;
-      color: var(--dark-color);
-      font-weight: 600;
-  }
-  
-  .info-link {
-      color: var(--secondary-color);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition-main);
-      position: relative;
-      padding-bottom: 2px;
-  }
-  
-  .info-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient-primary);
-      transition: width 0.3s ease;
-  }
-  
-  .info-link:hover {
-      color: var(--primary-color);
-  }
-  
-  .info-link:hover::after {
-      width: 100%;
-  }
-  
-  .stores-section {
-      padding: 2rem 0;
-  }
-  
-  .stores-section h2 {
-      color: var(--dark-color);
-      margin-bottom: 2.5rem;
-      font-size: 2rem;
-      font-weight: 600;
-      text-align: center;
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-  }
-  
-  .stores-section h2::after {
-      content: '';
-      position: absolute;
-      width: 30%;
-      height: 3px;
-      background: var(--gradient-primary);
-      bottom: -10px;
-      left: 35%;
-      border-radius: 50px;
-  }
-  
-  .stores-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2.5rem;
-  }
-  
-  .store-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-      transition: var(--transition-main);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transform-style: preserve-3d;
-      perspective: 1000px;
-  }
-  
-  .store-card:hover {
-      transform: translateY(-10px) rotateX(5deg);
-      box-shadow: var(--shadow-strong);
-      border-color: rgba(255, 255, 255, 0.3);
-  }
-  
-  .store-image {
-      width: 100%;
-      height: 200px;
-      position: relative;
-      overflow: hidden;
-  }
-  
-  .store-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(26, 34, 56, 0.3);
-      z-index: 1;
-  }
-  
-  .store-slideshow {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-  }
-  
-  .store-slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out, transform 0.6s ease;
-      background-color: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  
-  .store-slide.active {
-      opacity: 1;
-  }
-  
-  .store-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-  }
-  
-  .store-card:hover .store-slide.active img {
-      transform: scale(1.1);
-  }
-  
-  .store-content {
-      padding: 2rem;
-      position: relative;
-  }
-  
-  .store-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 10%;
-      width: 80%;
-      height: 3px;
-      background: var(--gradient-secondary);
-      border-radius: 50px;
-  }
-  
-  .store-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      color: var(--dark-color);
-      font-weight: 600;
-  }
-  
-  .store-content p {
-      color: #555;
-      margin-bottom: 1.5rem;
-      font-weight: 300;
-  }
-  
-  .store-content .contact-info {
-      margin: 1.5rem 0 0.5rem;
-      background: rgba(249, 249, 249, 0.5);
-      padding: 1rem;
-      border-radius: 10px;
-      border-left: 3px solid var(--primary-color);
-  }
-  
-  .contact-info p {
-      margin-bottom: 0.5rem;
-  }
-  
-  footer {
-      text-align: center;
-      padding: 3rem 0;
-      margin-top: 5rem;
-      background: var(--gradient-dark);
-      color: white;
-      position: relative;
-  }
-  
-  footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 10px;
-      background: var(--gradient-primary);
-  }
-  
-  footer p {
-      font-weight: 300;
-      letter-spacing: 1px;
-  }
-  
-  /* Animation for store cards */
-  @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .store-card {
-      animation: fadeIn 0.8s ease-out forwards;
-      opacity: 0;
-  }
-  
-  .store-card:nth-child(1) { animation-delay: 0.1s; }
-  .store-card:nth-child(2) { animation-delay: 0.2s; }
-  .store-card:nth-child(3) { animation-delay: 0.3s; }
-  .store-card:nth-child(4) { animation-delay: 0.4s; }
-  
-  @media (max-width: 768px) {
-      .info-grid {
-          grid-template-columns: 1fr;
-      }
-      
-      .header h1 {
-          font-size: 2rem;
-      }
-      
-      .language-toggle {
-          top: 2px;
-          right: 7px;
-      }
-      
-      .info-section,
-      .store-content {
-          padding: 1.5rem;
-      }
-      
-      .store-card:hover {
-          transform: translateY(-5px);
-      }
-
-      .navigation,
-      .container {
-        padding: .5rem;
-      }
-
-      .language-toggle button {
-        font-size: 0.8rem;
-      }
-
-      .nav-container {
-        gap: 0.5rem;
-      }
-
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulsa's Mini Bazaar | Tulsa Bazaars</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #ff4d6d;
+            --primary-light: #ffa5b6;
+            --secondary-color: #3a86ff;
+            --secondary-light: #7eb0ff;
+            --dark-color: #1a2238;
+            --light-color: #f8f9fa;
+            --accent-color: #ff9e00;
+            --success-color: #0ead69;
+            --font-main: 'Poppins', sans-serif;
+            --gradient-primary: linear-gradient(135deg, #ff4d6d 0%, #ff9e00 100%);
+            --gradient-secondary: linear-gradient(135deg, #3a86ff 0%, #4cc9f0 100%);
+            --gradient-dark: linear-gradient(135deg, #1a2238 0%, #394867 100%);
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-strong: 0 15px 35px rgba(0,0,0,0.15);
+            --transition-main: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e0e0e0' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-toggle button {
+            background: var(--gradient-secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition-main);
+            box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+        }
+        
+        .language-toggle button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(58, 134, 255, 0.4);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-top: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 25px rgba(255, 77, 109, 0.2);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header h1::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--gradient-primary);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 50px;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+            color: #555;
+            font-weight: 300;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-main);
+        }
+        
+        .back-link:hover {
+            color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+        
+        .back-link i {
+            margin-right: 5px;
+        }
+        
+        .shops-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+        
+        .shop-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-main);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .shop-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .shop-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .shop-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .shop-card:hover .shop-image img {
+            transform: scale(1.1);
+        }
+        
+        .shop-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .shop-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            color: var(--dark-color);
+        }
+        
+        .shop-description {
+            color: #555;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+        
+        .shop-info {
+            margin-top: auto;
+        }
+        
+        .shop-hours, .shop-location, .shop-contact {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+        }
+        
+        .shop-hours i, .shop-location i, .shop-contact i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            background: var(--gradient-dark);
+            color: white;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--gradient-primary);
+        }
+        
+        footer p {
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shop-card {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .shops-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Add font awesome icons */
+        .fa {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .fa-clock {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ff4d6d' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z'/%3E%3C/svg%3E");
+        }
+        
+        .fa-map-marker {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath fill='%23ff4d6d' d='M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z'/%3E%3C/svg%3E");
+        }
+        
+        .fa-phone {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ff4d6d' d='M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z'/%3E%3C/svg%3E");
+        }
+    </style>
 </head>
 <body>
-<div class="language-toggle">
-  <button id="lang-toggle" onclick="toggleLanguage()">English</button>
-</div>
+    <div class="language-toggle">
+        <button id="lang-toggle" onclick="toggleLanguage()">English</button>
+    </div>
 
-<div class="navigation">
-  <div class="container">
-      <div class="nav-container">
-          <a href="index.html" class="nav-link lang-es">Inicio</a>
-          <a href="index.html" class="nav-link lang-en" style="display: none;">Home</a>
-          <a href="el-bazaar.html" class="nav-link lang-es">El Bazaar</a>
-          <a href="el-bazaar.html" class="nav-link lang-en" style="display: none;">El Bazaar</a>
-          <a href="mini-bazaar.html" class="nav-link lang-es">Mini Bazaar</a>
-          <a href="mini-bazaar.html" class="nav-link lang-en" style="display: none;">Mini Bazaar</a>
-      </div>
-  </div>
-</div>
+    <div class="container">
+        <a href="index.html" class="back-link">
+            <i class="fa fa-arrow-left"></i>
+            <span class="lang-es">Volver a Inicio</span>
+            <span class="lang-en" style="display: none;">Back to Home</span>
+        </a>
+        
+        <header class="header">
+            <h1 class="lang-es">Tulsa's Mini Bazaar</h1>
+            <h1 class="lang-en" style="display: none;">Tulsa's Mini Bazaar</h1>
+            <p class="lang-es">Un centro comercial íntimo con tiendas selectas y atención personalizada.</p>
+            <p class="lang-en" style="display: none;">An intimate shopping center with select stores and personalized attention.</p>
+        </header>
 
-<div class="container">
-  <header class="header">
-      <h1 class="lang-es">Tulsa's Mini Bazaar</h1>
-      <h1 class="lang-en" style="display: none;">Tulsa's Mini Bazaar</h1>
-      <p class="lang-es">Un centro comercial íntimo con tiendas selectas en Tulsa.</p>
-      <p class="lang-en" style="display: none;">An intimate shopping center with select stores in Tulsa.</p>
-  </header>
+        <div class="shops-container">
+            <!-- Shop 1 -->
+            <div class="shop-card" style="animation-delay: 0.1s;">
+                <div class="shop-image">
+                    <img src="pictures/shops/zukasa-furniture.jpg" alt="Zukasa Furniture">
+                </div>
+                <div class="shop-content">
+                    <h3 class="shop-title">ZUKASA FURNITURE</h3>
+                    <p class="shop-description lang-es">Tienda de muebles con diseños modernos y clásicos para todos los espacios de su hogar.</p>
+                    <p class="shop-description lang-en" style="display: none;">Furniture store with modern and classic designs for all spaces in your home.</p>
+                    <div class="shop-info">
+                        <div class="shop-hours">
+                            <i class="fa fa-clock"></i>
+                            <span class="lang-es">Horario: 10:00 AM - 7:00 PM (Lun-Sáb)</span>
+                            <span class="lang-en" style="display: none;">Hours: 10:00 AM - 7:00 PM (Mon-Sat)</span>
+                        </div>
+                        <div class="shop-location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="lang-es">Local #1</span>
+                            <span class="lang-en" style="display: none;">Store #1</span>
+                        </div>
+                        <div class="shop-contact">
+                            <i class="fa fa-phone"></i>
+                            <span>(918) XXX-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <section class="info-section">
-      <h2 class="lang-es">Información</h2>
-      <h2 class="lang-en" style="display: none;">Information</h2>
-      
-      <div class="info-grid">
-          <div class="info-item">
-              <h3 class="lang-es">Dirección</h3>
-              <h3 class="lang-en" style="display: none;">Address</h3>
-              <p>
-                  <a href="#" class="info-link address-link" data-address="12564 E 21st ST, Tulsa, OK 74129">12564 E 21st ST, Tulsa, OK 74129</a>
-              </p>
-          </div>
-          
-          <div class="info-item">
-              <h3 class="lang-es">Teléfono</h3>
-              <h3 class="lang-en" style="display: none;">Phone</h3>
-              <p>
-                  <a href="tel:5395937048" class="info-link">(539) 593-7048</a>
-              </p>
-          </div>
-          
-          <div class="info-item">
-              <h3 class="lang-es">Horario</h3>
-              <h3 class="lang-en" style="display: none;">Business Hours</h3>
-              <p class="lang-es">Todos los días excepto martes: 10:00 AM - 8:00 PM</p>
-              <p class="lang-es">Martes: Cerrado</p>
-              <p class="lang-en" style="display: none;">Every day except Tuesday: 10:00 AM - 8:00 PM</p>
-              <p class="lang-en" style="display: none;">Tuesday: Closed</p>
-          </div>
-      </div>
-  </section>
+            <!-- Shop 2 -->
+            <div class="shop-card" style="animation-delay: 0.2s;">
+                <div class="shop-image">
+                    <img src="pictures/shops/rancho-nuevo-boots.jpg" alt="Rancho Nuevo Boots">
+                </div>
+                <div class="shop-content">
+                    <h3 class="shop-title">RANCHO NUEVO BOOTS</h3>
+                    <p class="shop-description lang-es">Ropa vaquera, botas de trabajo, gorras, ropa para trabajo y más.</p>
+                    <p class="shop-description lang-en" style="display: none;">Specialists in cowboy and work boots, with styles for the whole family.</p>
+                    <div class="shop-info">
+                        <div class="shop-hours">
+                            <i class="fa fa-clock"></i>
+                            <span class="lang-es">Horario: 9:00 AM - 8:00 PM (Lun-Dom)</span>
+                            <span class="lang-en" style="display: none;">Hours: 9:00 AM - 8:00 PM (Mon-Sun)</span>
+                        </div>
+                        <div class="shop-location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="lang-es">Local #2</span>
+                            <span class="lang-en" style="display: none;">Store #2</span>
+                        </div>
+                        <div class="shop-contact">
+                            <i class="fa fa-phone"></i>
+                            <span>(918) XXX-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <section class="stores-section">
-      <h2 class="lang-es">Nuestras Tiendas</h2>
-      <h2 class="lang-en" style="display: none;">Our Stores</h2>
-      
-      <div class="stores-grid">
-          <!-- Store 1 -->
-          <div class="store-card">
-              <div class="store-image">
-                  <div class="store-slideshow" data-store="barri-financial-mini">
-                      <div class="store-slide active">
-                          <img src="pictures/barri/barri.webp" alt="BARRI FINANCIAL GROUP">
-                      </div>
-                      <div class="store-slide">
-                          <img src="pictures/barri/barri.webp" alt="BARRI FINANCIAL GROUP Services">
-                      </div>
-                  </div>
-              </div>
-              <div class="store-content">
-                  <h3>BARRI FINANCIAL GROUP</h3>
-                  <p class="lang-es">Cobro de cheques, envío de dinero, giros</p>
-                  <p class="lang-en" style="display: none;">Check cashing, money sending services, money orders</p>
-                  <div class="contact-info">
-                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                  </div>
-              </div>
-          </div>
-          
-          <!-- Store 2 -->
-          <div class="store-card">
-              <div class="store-image">
-                  <div class="store-slideshow" data-store="zukasa-furniture">
-                      <div class="store-slide active">
-                          <img src="pictures/furniture store/furniture store_001.webp" alt="ZUKASA FURNITURE STORE">
-                      </div>
-                      <div class="store-slide">
-                          <img src="pictures/furniture store/furniture store_002.webp" alt="ZUKASA FURNITURE Products">
-                      </div>
-                  </div>
-              </div>
-              <div class="store-content">
-                  <h3>ZUKASA FURNITURE STORE</h3>
-                  <p class="lang-es">Mesas, sofás, camas y más</p>
-                  <p class="lang-en" style="display: none;">Tables, couches, beds, etc.</p>
-                  <div class="contact-info">
-                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                  </div>
-              </div>
-          </div>
-          
-          <!-- Store 3 -->
-          <div class="store-card">
-              <div class="store-image">
-                  <div class="store-slideshow" data-store="rancho-nuevo-mini">
-                      <div class="store-slide active">
-                          <img src="pictures/cowboy/boots/boots_004.webp" alt="RANCHO NUEVO BOOTS">
-                      </div>
-                      <div class="store-slide">
-                          <img src="pictures/cowboy/hats/hats_003.webp" alt="RANCHO NUEVO Western Wear">
-                      </div>
-                  </div>
-              </div>
-              <div class="store-content">
-                  <h3>RANCHO NUEVO BOOTS</h3>
-                  <p class="lang-es">Botas, sombreros, cinturones, chamarras, jeans</p>
-                  <p class="lang-en" style="display: none;">Boots, hats, belts, jackets, jeans</p>
-                  <div class="contact-info">
-                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                  </div>
-              </div>
-          </div>
-          
-          <!-- Store 4 -->
-          <div class="store-card">
-              <div class="store-image">
-                  <div class="store-slideshow" data-store="rc-sports-mini">
-                      <div class="store-slide active">
-                          <img src="pictures/soccer store/soccer store_002.webp" alt="RC SPORTS">
-                      </div>
-                      <div class="store-slide">
-                          <img src="pictures/soccer store/soccer store_001.webp" alt="RC SPORTS Custom Shirts">
-                      </div>
-                  </div>
-              </div>
-              <div class="store-content">
-                  <h3>RC SPORTS</h3>
-                  <p class="lang-es">Camisetas personalizadas para equipos y eventos, accesorios de fútbol</p>
-                  <p class="lang-en" style="display: none;">Custom shirts for teams and events, soccer accessories</p>
-                  <div class="contact-info">
-                      <p class="lang-es">Teléfono: <a href="tel:#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Phone: <a href="tel:#" class="info-link">To be defined</a></p>
-                      <p class="lang-es">Página web: <a href="#" class="info-link">Por definir</a></p>
-                      <p class="lang-en" style="display: none;">Website: <a href="#" class="info-link">To be defined</a></p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-</div>
+            <!-- Shop 3 -->
+            <div class="shop-card" style="animation-delay: 0.3s;">
+                <div class="shop-image">
+                    <img src="pictures/shops/barri.jpg" alt="Barri">
+                </div>
+                <div class="shop-content">
+                    <h3 class="shop-title">Barri</h3>
+                    <p class="shop-description lang-es">Servicios diversos incluyendo envío de dinero, pago de facturas, cambio de cheques y más.</p>
+                    <p class="shop-description lang-en" style="display: none;">Various services including money transfers, bill payments, check cashing, and more.</p>
+                    <div class="shop-info">
+                        <div class="shop-hours">
+                            <i class="fa fa-clock"></i>
+                            <span class="lang-es">Horario: 9:00 AM - 8:00 PM (Lun-Dom)</span>
+                            <span class="lang-en" style="display: none;">Hours: 9:00 AM - 8:00 PM (Mon-Sun)</span>
+                        </div>
+                        <div class="shop-location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="lang-es">Local #3</span>
+                            <span class="lang-en" style="display: none;">Store #3</span>
+                        </div>
+                        <div class="shop-contact">
+                            <i class="fa fa-phone"></i>
+                            <span>(918) XXX-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<footer>
-  <p class="lang-es">&copy; 2025 Tulsa's Mini Bazaar. Todos los derechos reservados.</p>
-  <p class="lang-en" style="display: none;">&copy; 2025 Tulsa's Mini Bazaar. All rights reserved.</p>
-</footer>
+            <!-- Shop 4 -->
+            <div class="shop-card" style="animation-delay: 0.4s;">
+                <div class="shop-image">
+                    <img src="pictures/shops/the-zone-soccer.jpg" alt="The Zone Soccer Goods">
+                </div>
+                <div class="shop-content">
+                    <h3 class="shop-title">THE ZONE SOCCER GOODS</h3>
+                    <p class="shop-description lang-es">Tienda especializada en artículos de fútbol, incluyendo camisetas de los equipos más populares del mundo, balones, espinilleras, calcetas, banderas y accesorios esenciales para futbolistas.</p>
+                    <p class="shop-description lang-en" style="display: none;">Specialized store for soccer items, including jerseys from the most popular teams in the world, balls, shin guards, socks, flags, and essential accessories for soccer players.</p>
+                    <div class="shop-info">
+                        <div class="shop-hours">
+                            <i class="fa fa-clock"></i>
+                            <span class="lang-es">Horario: Lunes: Cerrado. Martes a Sábado: 10:30 AM - 7:00 PM. Domingo: 11:00 AM - 5:00 PM</span>
+                            <span class="lang-en" style="display: none;">Hours: Monday: Closed. Tuesday to Saturday: 10:30 AM - 7:00 PM. Sunday: 11:00 AM - 5:00 PM</span>
+                        </div>
+                        <div class="shop-location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="lang-es">Local #4</span>
+                            <span class="lang-en" style="display: none;">Store #4</span>
+                        </div>
+                        <div class="shop-contact">
+                            <i class="fa fa-phone"></i>
+                            <span>(918) XXX-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<script>
-  let language = 'es'; // Default language is Spanish
-  
-  function toggleLanguage() {
-      language = language === 'es' ? 'en' : 'es';
-      
-      const esElements = document.querySelectorAll('.lang-es');
-      const enElements = document.querySelectorAll('.lang-en');
-      const langToggle = document.getElementById('lang-toggle');
-      
-      if (language === 'en') {
-          esElements.forEach(el => el.style.display = 'none');
-          enElements.forEach(el => el.style.display = 'block');
-          langToggle.textContent = 'Español';
-      } else {
-          esElements.forEach(el => el.style.display = 'block');
-          enElements.forEach(el => el.style.display = 'none');
-          langToggle.textContent = 'English';
-      }
-  }
-  
-  // Slideshow functionality
-  function initSlideshows() {
-      const slideshows = document.querySelectorAll('.store-slideshow');
-      
-      slideshows.forEach(slideshow => {
-          const slides = slideshow.querySelectorAll('.store-slide');
-          let currentSlide = 0;
-          
-          // Only setup slideshow if more than one slide exists
-          if (slides.length > 1) {
-              setInterval(() => {
-                  slides[currentSlide].classList.remove('active');
-                  currentSlide = (currentSlide + 1) % slides.length;
-                  slides[currentSlide].classList.add('active');
-              }, 3000); // Change slide every 3 seconds
-          }
-      });
-  }
-  
-  // Address link functionality
-  function setupAddressLinks() {
-      const addressLinks = document.querySelectorAll('.address-link');
-      
-      addressLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-              e.preventDefault();
-              const address = this.getAttribute('data-address');
-              
-              // Check if iOS (iPhone, iPad, iPod)
-              const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-              
-              if (isIOS) {
-                  window.open(`maps://?q=${encodeURIComponent(address)}`, '_blank');
-              } else {
-                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
-              }
-          });
-      });
-  }
-  
-  // Initialize when the page loads
-  window.onload = function() {
-      initSlideshows();
-      setupAddressLinks();
-      
-      // Check if there's a saved language preference and apply it
-      const savedLanguage = localStorage.getItem('preferredLanguage');
-      if (savedLanguage) {
-          language = savedLanguage;
-          toggleLanguage();
-      }
-      
-      // Add animation to the header
-      const headerTitle = document.querySelector('.header h1');
-      headerTitle.style.opacity = '0';
-      headerTitle.style.transform = 'translateY(-20px)';
-      
-      setTimeout(() => {
-          headerTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-          headerTitle.style.opacity = '1';
-          headerTitle.style.transform = 'translateY(0)';
-      }, 300);
-  };
-</script>
+            <!-- Shop 5 -->
+            <div class="shop-card" style="animation-delay: 0.5s;">
+                <div class="shop-image">
+                    <img src="pictures/shops/vibras-tulsa.jpg" alt="Vibras Tulsa Printing">
+                </div>
+                <div class="shop-content">
+                    <h3 class="shop-title">VIBRAS TULSA PRINTING</h3>
+                    <p class="shop-description lang-es">Servicios de impresión y bordado personalizado, incluyendo camisetas personalizadas, tarjetas de presentación, letreros de patio (yard signs) y más.</p>
+                    <p class="shop-description lang-en" style="display: none;">Customized printing and embroidery services, including custom t-shirts, business cards, yard signs, and more.</p>
+                    <div class="shop-info">
+                        <div class="shop-hours">
+                            <i class="fa fa-clock"></i>
+                            <span class="lang-es">Horario: 9:00 AM - 6:00 PM (Lun-Vie), 10:00 AM - 4:00 PM (Sáb)</span>
+                            <span class="lang-en" style="display: none;">Hours: 9:00 AM - 6:00 PM (Mon-Fri), 10:00 AM - 4:00 PM (Sat)</span>
+                        </div>
+                        <div class="shop-location">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="lang-es">Local #5</span>
+                            <span class="lang-en" style="display: none;">Store #5</span>
+                        </div>
+                        <div class="shop-contact">
+                            <i class="fa fa-phone"></i>
+                            <span>(918) XXX-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="lang-es">&copy; 2025 Bazares de Tulsa. Todos los derechos reservados.</p>
+        <p class="lang-en" style="display: none;">&copy; 2025 Tulsa Bazaars. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let language = 'es'; // Default language is Spanish
+        
+        function toggleLanguage() {
+            language = language === 'es' ? 'en' : 'es';
+            
+            const esElements = document.querySelectorAll('.lang-es');
+            const enElements = document.querySelectorAll('.lang-en');
+            const langToggle = document.getElementById('lang-toggle');
+            
+            if (language === 'en') {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                langToggle.textContent = 'Español';
+            } else {
+                esElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                langToggle.textContent = 'English';
+            }
+            
+            // Save language preference to localStorage
+            localStorage.setItem('preferredLanguage', language);
+        }
+        
+        // Check if there's a saved language preference and apply it
+        window.onload = function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            if (savedLanguage) {
+                language = savedLanguage;
+                toggleLanguage();
+            }
+            
+            // Add animation delay to cards
+            const cards = document.querySelectorAll('.shop-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.1 * index}s`;
+            });
+        };
+    </script>
 </body>
 </html>

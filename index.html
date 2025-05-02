@@ -133,6 +133,7 @@
             transform: translateY(-15px) rotateX(5deg);
             box-shadow: var(--shadow-strong);
             border-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
         }
         
         .bazaar-image {
@@ -312,7 +313,7 @@
         </header>
 
         <div class="bazaar-options">
-            <div class="bazaar-card">
+            <div class="bazaar-card bazaar1">
                 <div class="bazaar-image">
                     <img src="pictures/bazaar/el-bazaar.webp" alt="El Bazaar Indoor Shopping Center">
                 </div>
@@ -325,7 +326,7 @@
                 </div>
             </div>
 
-            <div class="bazaar-card">
+            <div class="bazaar-card bazaar2">
                 <div class="bazaar-image">
                     <img src="pictures/bazaar/mini-bazaar.webp" alt="Tulsa's Mini Bazaar">
                 </div>
@@ -377,6 +378,16 @@
                 toggleLanguage();
             }
         };
+
+        const bazaarRedirect = document.querySelector('.bazaar1');
+        bazaarRedirect.addEventListener('click', () => {
+            window.location.href = "el-bazaar.html";
+        });
+
+        const bazaarRedirect2 = document.querySelector('.bazaar2');
+        bazaarRedirect2.addEventListener('click', () => {
+            window.location.href = "mini-bazaar.html";
+        });
     </script>
 </body>
 </html>
