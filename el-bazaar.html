@@ -823,7 +823,13 @@
         
         function toggleLanguage() {
             language = language === 'es' ? 'en' : 'es';
+            applyLanguage();
             
+            // Save language preference to localStorage
+            localStorage.setItem('preferredLanguage', language);
+        }
+        
+        function applyLanguage() {
             const esElements = document.querySelectorAll('.lang-es');
             const enElements = document.querySelectorAll('.lang-en');
             const langToggle = document.getElementById('lang-toggle');
@@ -837,18 +843,24 @@
                 enElements.forEach(el => el.style.display = 'none');
                 langToggle.textContent = 'English';
             }
-            
-            // Save language preference to localStorage
-            localStorage.setItem('preferredLanguage', language);
         }
         
-        // Check if there's a saved language preference and apply it
-        window.onload = function() {
+        function initializeLanguage() {
             const savedLanguage = localStorage.getItem('preferredLanguage');
             if (savedLanguage) {
                 language = savedLanguage;
-                toggleLanguage();
             }
+            applyLanguage();
+        }
+        
+        // Initialize language when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLanguage();
+        });
+        
+        // Also initialize on window load and set up shop card animations
+        window.onload = function() {
+            initializeLanguage();
             
             // Add animation delay to cards
             const cards = document.querySelectorAll('.shop-card');
@@ -856,6 +868,6 @@
                 card.style.animationDelay = `${0.1 * index}s`;
             });
         };
-    </script>    
+        </script>
     </body>
 </html>

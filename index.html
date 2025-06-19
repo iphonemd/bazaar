@@ -306,10 +306,10 @@
 
     <div class="container">
         <header class="header">
-            <h1 class="lang-es">Bienvenido a los Bazares de Tulsa</h1>
-            <h1 class="lang-en" style="display: none;">Welcome to Tulsa Bazaars</h1>
-            <p class="lang-es">Explore nuestros centros comerciales con tiendas únicas y servicios diversos para toda la familia.</p>
-            <p class="lang-en" style="display: none;">Explore our shopping centers with unique stores and diverse services for the whole family.</p>
+            <h1 class="lang-es">Bienvenido!</h1>
+            <h1 class="lang-en" style="display: none;">Welcome</h1>
+            <p class="lang-es">Explore nuestros 2 centros comerciales con tiendas únicas y servicios diversos para toda la familia.</p>
+            <p class="lang-en" style="display: none;">Explore our 2 indoor shopping centers with unique stores and diverse services for the whole family.</p>
         </header>
 
         <div class="bazaar-options">
@@ -342,8 +342,8 @@
     </div>
 
     <footer>
-        <p class="lang-es">&copy; 2025 Bazares de Tulsa. Todos los derechos reservados.</p>
-        <p class="lang-en" style="display: none;">&copy; 2025 Tulsa Bazaars. All rights reserved.</p>
+        <p class="lang-es">&copy; 2025 El Bazaar Indoor Shopping Center y Tulsa's Mini Bazaar. Todos los derechos reservados.</p>
+        <p class="lang-en" style="display: none;">&copy; 2025 El Bazaar Indoor Shopping Center y Tulsa's Mini Bazaar. All rights reserved.</p>
     </footer>
 
     <script>
@@ -351,7 +351,13 @@
         
         function toggleLanguage() {
             language = language === 'es' ? 'en' : 'es';
+            applyLanguage();
             
+            // Save language preference to localStorage
+            localStorage.setItem('preferredLanguage', language);
+        }
+        
+        function applyLanguage() {
             const esElements = document.querySelectorAll('.lang-es');
             const enElements = document.querySelectorAll('.lang-en');
             const langToggle = document.getElementById('lang-toggle');
@@ -365,29 +371,42 @@
                 enElements.forEach(el => el.style.display = 'none');
                 langToggle.textContent = 'English';
             }
-            
-            // Save language preference to localStorage
-            localStorage.setItem('preferredLanguage', language);
         }
         
-        // Check if there's a saved language preference and apply it
-        window.onload = function() {
+        function initializeLanguage() {
             const savedLanguage = localStorage.getItem('preferredLanguage');
             if (savedLanguage) {
                 language = savedLanguage;
-                toggleLanguage();
             }
+            applyLanguage();
+        }
+        
+        // Initialize language when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLanguage();
+        });
+        
+        // Also initialize on window load
+        window.onload = function() {
+            initializeLanguage();
         };
-
-        const bazaarRedirect = document.querySelector('.bazaar1');
-        bazaarRedirect.addEventListener('click', () => {
-            window.location.href = "el-bazaar.html";
+        
+        // Bazaar redirect functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const bazaarRedirect = document.querySelector('.bazaar1');
+            if (bazaarRedirect) {
+                bazaarRedirect.addEventListener('click', () => {
+                    window.location.href = "el-bazaar.html";
+                });
+            }
+        
+            const bazaarRedirect2 = document.querySelector('.bazaar2');
+            if (bazaarRedirect2) {
+                bazaarRedirect2.addEventListener('click', () => {
+                    window.location.href = "mini-bazaar.html";
+                });
+            }
         });
-
-        const bazaarRedirect2 = document.querySelector('.bazaar2');
-        bazaarRedirect2.addEventListener('click', () => {
-            window.location.href = "mini-bazaar.html";
-        });
-    </script>
+        </script>
 </body>
 </html>
